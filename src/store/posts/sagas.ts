@@ -1,18 +1,19 @@
-import { takeEvery } from "redux-saga/effects";
-import { IPost, postsActions } from "./postsSlice";
-import { PayloadAction } from "@reduxjs/toolkit";
-import { IPostOmitted } from "./post.types";
-import { SagaIterator } from "redux-saga";
-import { call, put } from "redux-saga/effects";
+import { takeEvery } from 'redux-saga/effects';
+import { IPost, postsActions } from './postsSlice';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { IPostOmitted } from './post.types';
+import { SagaIterator } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 
 type fetchPostsFnType = () => Promise<IPost>;
 type addPostsFnType = (data: IPostOmitted) => Promise<IPost>;
 type removePostsFnType = (id: number) => Promise<IPost>;
+type editPostsFnType = (data: IPost) => Promise<IPost>;
 
 // воркер и функция для запроса
 const fetchPosts: fetchPostsFnType = async () => {
-  return fetch("https://jsonplaceholder.typicode.com/posts?_limit=3").then(
-    (res) => res.json()
+  return fetch('https://jsonplaceholder.typicode.com/posts?_limit=3').then((res) =>
+    res.json()
   );
 };
 function* workGetPostsFetch() {
@@ -22,11 +23,11 @@ function* workGetPostsFetch() {
 
 // воркер и функция для создания поста
 const addPost: addPostsFnType = async (data) => {
-  return fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
+  return fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      'Content-type': 'application/json; charset=UTF-8',
     },
   }).then((response) => response.json());
 };
@@ -39,13 +40,11 @@ function* workAddPost({ payload }: PayloadAction<IPostOmitted>): SagaIterator {
 // воркер и функция для создания поста
 const removePosts: removePostsFnType = async (id) => {
   return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   }).then((response) => response.json());
 };
 
-function* workRemovePost({
-  payload,
-}: PayloadAction<{ id: number }>): SagaIterator {
+function* workRemovePost({ payload }: PayloadAction<{ id: number }>): SagaIterator {
   const { id } = payload;
   yield call(removePosts, id);
 
@@ -53,24 +52,19 @@ function* workRemovePost({
 }
 
 //воркер и функция для редактирования поста
-const replacePosts: removePostsFnType = async (id) => {
-  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    method: "PUT",
-    body: JSON.stringify({
-      id: 1,
-      title: "foo",
-      body: "bar",
-      userId: 1,
-    }),
+const editPost: editPostsFnType = async (data) => {
+  return fetch(`https://jsonplaceholder.typicode.com/posts/${data.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      'Content-type': 'application/json; charset=UTF-8',
     },
   }).then((response) => response.json());
 };
 
-function* workReplace() {
-  const post: IPost = yield call(replacePosts, payload);
-  yield put(postsActions.replacePosts(post));
+function* workReplace({ payload }: PayloadAction<IPost>) {
+  const post: IPost = yield call(editPost, payload);
+  yield put(postsActions.editPost(post));
 }
 
 // вотчер для всего
@@ -78,7 +72,7 @@ function* postSaga() {
   yield takeEvery(postsActions.getPosts, workGetPostsFetch);
   yield takeEvery(postsActions.reqAddPost, workAddPost);
   yield takeEvery(postsActions.reqRemovePosts, workRemovePost);
-  yield takeEvery(postsActions.reqReplacePosts, workReplace);
+  yield takeEvery(postsActions.reqEditPost, workReplace);
 }
 
 export default postSaga;

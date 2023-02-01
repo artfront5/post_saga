@@ -1,8 +1,8 @@
-import React from "react";
-import { useAppDispatch, useStateSelector } from "./store/hooks";
-import { IPost, postsActions } from "./store/posts/postsSlice";
-import "./App.css";
-import { getCurrentElement } from "./store/posts/post.selectors";
+import React from 'react';
+import { useAppDispatch, useStateSelector } from './store/hooks';
+import { IPost, postsActions } from './store/posts/postsSlice';
+import './App.css';
+import { getCurrentElement } from './store/posts/post.selectors';
 
 export default function Form() {
   const dispatch = useAppDispatch();
@@ -31,12 +31,12 @@ export default function Form() {
       </button>
       <input
         value={post.title}
-        onChange={(e) => setValue("title")(e.target.value)}
+        onChange={(e) => setValue('title')(e.target.value)}
         placeholder="title"
       />
       <input
         value={post.body}
-        onChange={(e) => setValue("body")(e.target.value)}
+        onChange={(e) => setValue('body')(e.target.value)}
         placeholder="body"
       />
       <hr />

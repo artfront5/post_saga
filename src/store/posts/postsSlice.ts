@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPostOmitted, IRemovePost } from "./post.types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPostOmitted, IRemovePost } from './post.types';
 
 export interface IPost {
   userId: number;
@@ -8,7 +8,7 @@ export interface IPost {
   body: string;
 }
 
-const postDefaultValues = { body: "", title: "", userId: 1 };
+const postDefaultValues = { body: '', title: '', userId: 1 };
 
 interface IPostState {
   posts: Array<IPost>;
@@ -21,7 +21,7 @@ const initialState: IPostState = {
 };
 
 const postsSlice = createSlice({
-  name: "post",
+  name: 'post',
   initialState,
   reducers: {
     // reducer для получения данных GET
@@ -49,8 +49,8 @@ const postsSlice = createSlice({
     },
 
     //reducer для редактирования данных PUT
-    reqReplacePosts: (state, { payload }: PayloadAction<{ id: number }>) => {},
-    putPost: (state, { payload }: PayloadAction<IPost>) => {
+    reqEditPost: (state, { payload }: PayloadAction<IPost>) => {},
+    editPost: (state, { payload }: PayloadAction<IPost>) => {
       const post = state.posts.find((post) => post.id === payload.id);
       if (post) {
         post.title = payload.title;
