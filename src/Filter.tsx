@@ -26,7 +26,7 @@ export default function Filter() {
     if (!loverCaseFilter) {
       return posts;
     }
-    return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
+    return posts.filter((post) => post.body.toLowerCase().includes(loverCaseFilter));
   }
 
   return (
