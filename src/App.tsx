@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useAppDispatch, useStateSelector } from './store/hooks';
 import cn from 'classnames';
 import { postsActions } from './store/posts/postsSlice';
@@ -12,8 +12,18 @@ function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector((state) => state.posts.posts);
-  // const filterTitleValue = useStateSelector((state) => state.filters.title);
-  // const filterBodyValue = useStateSelector((state) => state.filters.body);
+  // const users = useStateSelector((state) => state.users.users);
+  const filterTitleValue = useStateSelector((state) => state.filters.title);
+
+  const filteredPosts = useMemo(() => {
+    const loverCaseFilter = filterTitleValue.toLowerCase();
+
+    if (!loverCaseFilter) {
+      return posts;
+    }
+
+    return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
+  }, [posts, filterTitleValue]);
 
   const dispatch = useAppDispatch();
 
@@ -24,15 +34,6 @@ function App() {
   function handlerShowPosts() {
     setDetails((prev) => !prev);
   }
-
-  // function filteredPosts() {
-  //   const loverCaseFilter = filterTitleValue.toLowerCase();
-
-  //   if (!loverCaseFilter) {
-  //     return posts;
-  //   }
-  //   return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
-  // }
 
   return (
     <div className="App">
@@ -51,7 +52,7 @@ function App() {
       </div>
       {details
         ? null
-        : posts.map((post) => {
+        : filteredPosts.map((post) => {
             return <Post {...post} />;
           })}
     </div>
