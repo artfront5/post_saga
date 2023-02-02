@@ -6,11 +6,15 @@ import Form from './Form';
 import Post from './Post';
 
 import './App.css';
+import Filter from './Filter';
 
 function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector((state) => state.posts.posts);
+  const filterTitleValue = useStateSelector((state) => state.filters.title);
+  const filterBodyValue = useStateSelector((state) => state.filters.body);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,6 +23,15 @@ function App() {
 
   function handlerShowPosts() {
     setDetails((prev) => !prev);
+  }
+
+  function filteredPosts() {
+    const loverCaseFilter = filterTitleValue.toLowerCase();
+
+    if (!loverCaseFilter) {
+      return posts;
+    }
+    return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
   }
 
   return (
@@ -34,6 +47,7 @@ function App() {
         </button>
 
         <Form />
+        <Filter />
       </div>
       {details
         ? null
