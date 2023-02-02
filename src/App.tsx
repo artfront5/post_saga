@@ -12,8 +12,8 @@ function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector((state) => state.posts.posts);
-  const filterTitleValue = useStateSelector((state) => state.filters.title);
-  const filterBodyValue = useStateSelector((state) => state.filters.body);
+  // const filterTitleValue = useStateSelector((state) => state.filters.title);
+  // const filterBodyValue = useStateSelector((state) => state.filters.body);
 
   const dispatch = useAppDispatch();
 
@@ -25,14 +25,14 @@ function App() {
     setDetails((prev) => !prev);
   }
 
-  function filteredPosts() {
-    const loverCaseFilter = filterTitleValue.toLowerCase();
+  // function filteredPosts() {
+  //   const loverCaseFilter = filterTitleValue.toLowerCase();
 
-    if (!loverCaseFilter) {
-      return posts;
-    }
-    return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
-  }
+  //   if (!loverCaseFilter) {
+  //     return posts;
+  //   }
+  //   return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
+  // }
 
   return (
     <div className="App">
