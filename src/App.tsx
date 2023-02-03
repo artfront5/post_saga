@@ -8,13 +8,14 @@ import Post from './Post';
 import './App.css';
 import Filter from './Filter';
 import { usersActions } from './store/users/usersSlice';
+import { getFilterPosts, getPosts } from './store/posts/post.selectors';
 
 function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
-  const posts = useStateSelector((state) => state.posts.posts);
+  const posts = useStateSelector(getPosts);
   // const users = useStateSelector((state) => state.users.users);
-  const { title, body } = useStateSelector((state) => state.posts.filter);
+  const { title, body } = useStateSelector(getFilterPosts);
 
   const filteredPosts = useMemo(() => {
     const lowerCaseFilterTitle = title.toLowerCase();

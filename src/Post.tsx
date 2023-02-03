@@ -1,12 +1,13 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { IPost, postsActions } from './store/posts/postsSlice';
 import { useAppDispatch, useStateSelector } from './store/hooks';
+import { getUsers } from './store/users/user.selectors';
 
 export default function Post({ id, title, body, userId }: IPost) {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
 
-  const users = useStateSelector((state) => state.users.users);
+  const users = useStateSelector(getUsers);
 
   const postAuthor = useMemo(() => {
     return users.find((user) => user.id === userId);
