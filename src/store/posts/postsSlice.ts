@@ -8,16 +8,25 @@ export interface IPost {
   body: string;
 }
 
+export interface IFilter {
+  title: string;
+  body: string;
+}
+
 const postDefaultValues = { body: '', title: '', userId: 1 };
+
+const filtersDefaultValues = { title: '', body: '' };
 
 interface IPostState {
   posts: Array<IPost>;
   currentElement: IPost;
+  filter: IFilter;
 }
 
 const initialState: IPostState = {
   posts: [],
   currentElement: postDefaultValues,
+  filter: filtersDefaultValues,
 };
 
 const postsSlice = createSlice({
@@ -42,9 +51,9 @@ const postsSlice = createSlice({
     },
 
     //reducer для отправки данных DELETE
-    reqRemovePosts: (state, { payload }: PayloadAction<{ id: number }>) => {},
-    removePosts: (state, { payload }: PayloadAction<{ id: number }>) => {
-      const index = state.posts.findIndex((post) => post.id === payload.id);
+    reqRemovePosts: (state, { payload }: PayloadAction<number>) => {},
+    removePosts: (state, { payload: id }: PayloadAction<number>) => {
+      const index = state.posts.findIndex((post) => post.id === id);
       state.posts.splice(index, 1);
     },
 
@@ -55,6 +64,14 @@ const postsSlice = createSlice({
       if (post) {
         post.title = payload.title;
       }
+    },
+
+    // reducer для фильтров
+    setTitle: (state, { payload }: PayloadAction<string>) => {
+      state.filter.title = payload;
+    },
+    setBody: (state, { payload }: PayloadAction<string>) => {
+      state.filter.body = payload;
     },
   },
 });

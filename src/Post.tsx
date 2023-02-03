@@ -1,10 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { IPost, postsActions } from './store/posts/postsSlice';
 import { useAppDispatch, useStateSelector } from './store/hooks';
 
 export default function Post({ id, title, body, userId }: IPost) {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+
+  const users = useStateSelector((state) => state.users.users);
+
+  const postAuthor = useMemo(() => {
+    return users.find((user) => user.id === userId);
+  }, [users]);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const dispatch = useAppDispatch();
@@ -14,7 +20,7 @@ export default function Post({ id, title, body, userId }: IPost) {
       postsActions.reqEditPost({
         title: titleRef.current!.value,
         body: bodyRef.current!.value,
-        userId: 1,
+        userId,
         id,
       })
     );
@@ -24,6 +30,11 @@ export default function Post({ id, title, body, userId }: IPost) {
   return (
     <div>
       <div key={id} className="post">
+        {postAuthor && (
+          <div>
+            <p>{postAuthor.name}</p> <p>{postAuthor.id}</p>
+          </div>
+        )}
         <textarea
           className="textarea"
           ref={titleRef}
@@ -37,9 +48,7 @@ export default function Post({ id, title, body, userId }: IPost) {
           disabled={!isEditMode}
         />
         <button
-          onClick={() =>
-            id !== undefined && dispatch(postsActions.reqRemovePosts({ id }))
-          }
+          onClick={() => id !== undefined && dispatch(postsActions.reqRemovePosts(id))}
         >
           Удалить
         </button>{' '}

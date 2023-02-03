@@ -7,28 +7,45 @@ import Post from './Post';
 
 import './App.css';
 import Filter from './Filter';
+import { usersActions } from './store/users/usersSlice';
 
 function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector((state) => state.posts.posts);
   // const users = useStateSelector((state) => state.users.users);
-  const filterTitleValue = useStateSelector((state) => state.filters.title);
+  const { title, body } = useStateSelector((state) => state.posts.filter);
 
   const filteredPosts = useMemo(() => {
-    const loverCaseFilter = filterTitleValue.toLowerCase();
+    const lowerCaseFilterTitle = title.toLowerCase();
+    const lowerCaseFilterBody = body.toLowerCase();
 
-    if (!loverCaseFilter) {
+    if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
       return posts;
     }
 
-    return posts.filter((post) => post.title.toLowerCase().includes(loverCaseFilter));
-  }, [posts, filterTitleValue]);
+    return posts.filter((post) => {
+      if (lowerCaseFilterTitle) {
+        if (!post.title.toLowerCase().includes(lowerCaseFilterTitle)) {
+          return false;
+        }
+      }
+
+      if (lowerCaseFilterBody) {
+        if (!post.body.toLowerCase().includes(lowerCaseFilterBody)) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [posts, title, body]);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(postsActions.getPosts());
+    dispatch(usersActions.getUsers());
   }, [dispatch]);
 
   function handlerShowPosts() {
@@ -50,11 +67,10 @@ function App() {
         <Form />
         <Filter />
       </div>
-      {details
-        ? null
-        : filteredPosts.map((post) => {
-            return <Post {...post} />;
-          })}
+      {!details &&
+        filteredPosts.map((post) => {
+          return <Post {...post} />;
+        })}
     </div>
   );
 }

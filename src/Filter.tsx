@@ -1,9 +1,10 @@
 import React from 'react';
-import { filterActions } from './store/filter/filterSlice';
+
 import { useStateSelector, useAppDispatch } from './store/hooks';
+import { postsActions } from './store/posts/postsSlice';
 
 const Filter = () => {
-  const { title, body } = useStateSelector((state) => state.filters);
+  const { title, body } = useStateSelector((state) => state.posts.filter);
   const dispatch = useAppDispatch();
 
   return (
@@ -12,13 +13,13 @@ const Filter = () => {
         type="text"
         placeholder="сортировать по title"
         value={title}
-        onChange={(e) => dispatch(filterActions.setTitle(e.target.value))}
+        onChange={(e) => dispatch(postsActions.setTitle(e.target.value))}
       />
       <input
         type="text"
         placeholder="сортировать по body"
         value={body}
-        onChange={(e) => dispatch(filterActions.setBody(e.target.value))}
+        onChange={(e) => dispatch(postsActions.setBody(e.target.value))}
       />
     </div>
   );

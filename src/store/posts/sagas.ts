@@ -44,11 +44,10 @@ const removePosts: removePostsFnType = async (id) => {
   }).then((response) => response.json());
 };
 
-function* workRemovePost({ payload }: PayloadAction<{ id: number }>): SagaIterator {
-  const { id } = payload;
-  yield call(removePosts, id);
+function* workRemovePost({ payload }: PayloadAction<number>): SagaIterator {
+  yield call(removePosts, payload);
 
-  yield put(postsActions.removePosts({ id }));
+  yield put(postsActions.removePosts(payload));
 }
 
 //воркер и функция для редактирования поста
