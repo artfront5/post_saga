@@ -1,11 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { IPost, postsActions } from './store/posts/postsSlice';
-import { useAppDispatch, useStateSelector } from './store/hooks';
-import { getUsers } from './store/users/user.selectors';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { IPost, postsActions } from '../../store/posts/postsSlice';
+import { useAppDispatch, useStateSelector } from '../../store/hooks';
+import { getUsers } from '../../store/users/user.selectors';
 
 export default function Post({ id, title, body, userId }: IPost) {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+  // const [count, setCount] = useState(1);
 
   const users = useStateSelector(getUsers);
 
@@ -25,6 +26,7 @@ export default function Post({ id, title, body, userId }: IPost) {
         id,
       })
     );
+
     setIsEditMode(false);
   }
 

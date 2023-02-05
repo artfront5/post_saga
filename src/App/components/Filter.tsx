@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useStateSelector, useAppDispatch } from './store/hooks';
-import { getFilterPosts } from './store/posts/post.selectors';
-import { postsActions } from './store/posts/postsSlice';
+import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { getFilterPosts } from '../../store/posts/post.selectors';
+import { postsActions } from '../../store/posts/postsSlice';
 
 const Filter = () => {
   const { title, body } = useStateSelector(getFilterPosts);

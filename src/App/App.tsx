@@ -1,20 +1,20 @@
 import React, { useEffect, useMemo } from 'react';
-import { useAppDispatch, useStateSelector } from './store/hooks';
+import { useAppDispatch, useStateSelector } from '../store/hooks';
 import cn from 'classnames';
-import { postsActions } from './store/posts/postsSlice';
-import Form from './Form';
-import Post from './Post';
+import { postsActions } from '../store/posts/postsSlice';
+import Post from './components/Post';
 
 import './App.css';
-import Filter from './Filter';
-import { usersActions } from './store/users/usersSlice';
-import { getFilterPosts, getPosts } from './store/posts/post.selectors';
+import Filter from './components/Filter';
+import { usersActions } from '../store/users/usersSlice';
+import { getFilterPosts, getPosts } from '../store/posts/post.selectors';
+import { FormForNewPost } from './components/FormForNewPost';
 
 function App() {
   const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector(getPosts);
-  // const users = useStateSelector((state) => state.users.users);
+
   const { title, body } = useStateSelector(getFilterPosts);
 
   const filteredPosts = useMemo(() => {
@@ -64,8 +64,7 @@ function App() {
         >
           {details ? 'Показать посты' : 'Скрыть посты'}
         </button>
-
-        <Form />
+        <FormForNewPost />
         <Filter />
       </div>
       {!details &&
