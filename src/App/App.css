@@ -49,7 +49,7 @@
 
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 50px;
   border: none;
 }
 
@@ -61,4 +61,29 @@ input {
 }
 
 input:disabled {
+}
+.px1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.mb {
+  margin: 10px;
+}
+
+.boxForPosts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.addPostBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputNew {
+  max-width: 600px;
 }

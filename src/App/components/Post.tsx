@@ -1,11 +1,12 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { IPost, postsActions } from '../../store/posts/postsSlice';
-import { useAppDispatch, useStateSelector } from '../../store/hooks';
-import { getUsers } from '../../store/users/user.selectors';
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import { IPost, postsActions } from "../../store/posts/postsSlice";
+import { useAppDispatch, useStateSelector } from "../../store/hooks";
+import { getUsers } from "../../store/users/user.selectors";
+import { Link } from "react-router-dom";
 
 export default function Post({ id, title, body, userId }: IPost) {
-  const titleRef = useRef<HTMLTextAreaElement>(null);
-  const bodyRef = useRef<HTMLTextAreaElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const bodyRef = useRef<HTMLInputElement>(null);
   // const [count, setCount] = useState(1);
 
   const users = useStateSelector(getUsers);
@@ -31,34 +32,38 @@ export default function Post({ id, title, body, userId }: IPost) {
   }
 
   return (
-    <div>
-      <div key={id} className="post">
-        {postAuthor && (
+    <div className="boxForPosts">
+      <div className="post">
+        {/* {postAuthor && (
           <div>
             <p>{postAuthor.name}</p> <p>{postAuthor.id}</p>
           </div>
-        )}
-        <textarea
+        )} */}
+        <input
           className="textarea"
           ref={titleRef}
           defaultValue={title}
           disabled={!isEditMode}
         />
-        <textarea
+        <input
           className="textarea"
           ref={bodyRef}
           defaultValue={body}
           disabled={!isEditMode}
         />
         <button
-          onClick={() => id !== undefined && dispatch(postsActions.reqRemovePosts(id))}
+          onClick={() =>
+            id !== undefined && dispatch(postsActions.reqRemovePosts(id))
+          }
         >
           Удалить
-        </button>{' '}
+        </button>{" "}
         {isEditMode ? (
           <button onClick={savePost}>save</button>
         ) : (
-          <button onClick={() => setIsEditMode(true)}>Редактировать</button>
+          <Link to={`/posts/${id}/edit`} onClick={() => setIsEditMode(true)}>
+            Редактировать
+          </Link>
         )}
       </div>
     </div>

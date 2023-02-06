@@ -1,78 +1,103 @@
-import React, { useEffect, useMemo } from 'react';
-import { useAppDispatch, useStateSelector } from '../store/hooks';
-import cn from 'classnames';
-import { postsActions } from '../store/posts/postsSlice';
-import Post from './components/Post';
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import React, { useEffect, useMemo } from "react";
+// import { useAppDispatch, useStateSelector } from "../store/hooks";
+// import cn from "classnames";
+// import { postsActions } from "../store/posts/postsSlice";
+// import Post from "./components/Post";
 
-import './App.css';
-import Filter from './components/Filter';
-import { usersActions } from '../store/users/usersSlice';
-import { getFilterPosts, getPosts } from '../store/posts/post.selectors';
-import { FormForNewPost } from './components/FormForNewPost';
+// import "./App.css";
+// import Filter from "./components/Filter";
+// import { Navbar } from "./components/Navbar";
+// import { usersActions } from "../store/users/usersSlice";
+// import { getFilterPosts, getPosts } from "../store/posts/post.selectors";
+// import { FormForNewPost } from "./components/FormForNewPost";
 
-function App() {
-  const [details, setDetails] = React.useState<boolean | string>('false');
+// function App() {
+//   const [details, setDetails] = React.useState<boolean | string>("false");
 
-  const posts = useStateSelector(getPosts);
+//   const posts = useStateSelector(getPosts);
 
-  const { title, body } = useStateSelector(getFilterPosts);
+//   const { title, body } = useStateSelector(getFilterPosts);
 
-  const filteredPosts = useMemo(() => {
-    const lowerCaseFilterTitle = title.toLowerCase();
-    const lowerCaseFilterBody = body.toLowerCase();
+//   const filteredPosts = useMemo(() => {
+//     const lowerCaseFilterTitle = title.toLowerCase();
+//     const lowerCaseFilterBody = body.toLowerCase();
 
-    if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
-      return posts;
-    }
+//     if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
+//       return posts;
+//     }
 
-    return posts.filter((post) => {
-      if (lowerCaseFilterTitle) {
-        if (!post.title.toLowerCase().includes(lowerCaseFilterTitle)) {
-          return false;
-        }
-      }
+//     return posts.filter((post) => {
+//       if (lowerCaseFilterTitle) {
+//         if (!post.title.toLowerCase().includes(lowerCaseFilterTitle)) {
+//           return false;
+//         }
+//       }
 
-      if (lowerCaseFilterBody) {
-        if (!post.body.toLowerCase().includes(lowerCaseFilterBody)) {
-          return false;
-        }
-      }
+//       if (lowerCaseFilterBody) {
+//         if (!post.body.toLowerCase().includes(lowerCaseFilterBody)) {
+//           return false;
+//         }
+//       }
 
-      return true;
-    });
-  }, [posts, title, body]);
+//       return true;
+//     });
+//   }, [posts, title, body]);
 
-  const dispatch = useAppDispatch();
+//   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(postsActions.getPosts());
-    dispatch(usersActions.getUsers());
-  }, [dispatch]);
+//   useEffect(() => {
+//     dispatch(postsActions.getPosts());
+//     dispatch(usersActions.getUsers());
+//   }, [dispatch]);
 
-  function handlerShowPosts() {
-    setDetails((prev) => !prev);
-  }
+//   function handlerShowPosts() {
+//     setDetails((prev) => !prev);
+//   }
 
+//   return (
+//     <div className="App">
+//       <Navbar />
+//       <div className="buttonsBox">
+//         {/* <button
+//           className={cn("buttonGetPost", { buttonPostHidden: details })}
+//           onClick={handlerShowPosts}
+//         > */}
+//         {/* {details ? "Показать посты" : "Скрыть посты"} */}
+//         {/* </button> */}
+
+//         <Filter />
+//       </div>
+//       {filteredPosts.map((post) => {
+//         return <Post {...post} />;
+//       })}
+//     </div>
+//   );
+// }
+
+// export default App;
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { FormForNewPost } from "./components/FormForNewPost";
+import Posts from "./components/Posts";
+import "./App.css";
+import Home from "./components/Home";
+import EditPost from "./components/EditPost";
+
+export function App() {
   return (
-    <div className="App">
-      Работа с ассинхронными действиями в связке Redux-Toolkit with Redux-Saga
-      <h2>Посты</h2>
-      <div className="buttonsBox">
-        <button
-          className={cn('buttonGetPost', { buttonPostHidden: details })}
-          onClick={handlerShowPosts}
-        >
-          {details ? 'Показать посты' : 'Скрыть посты'}
-        </button>
-        <FormForNewPost />
-        <Filter />
-      </div>
-      {!details &&
-        filteredPosts.map((post) => {
-          return <Post {...post} />;
-        })}
+    <div>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="*" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id/edit" element={<EditPost />} />
+          <Route path="/newPost" element={<FormForNewPost />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
-
-export default App;
