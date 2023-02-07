@@ -46,7 +46,13 @@ function NewPost() {
         onChange={(e) => setValue("body")(e.target.value)}
         placeholder="body"
       />
-      <button onClick={handlerAddPost}>новый пост</button>
+      {/* <button onClick={handlerAddPost}>новый пост</button> */}
+      <button
+        onClick={handlerAddPost}
+        className="waves-effect waves-light btn-small green"
+      >
+        <i className="material-icons right">save</i>новый пост
+      </button>
     </div>
   );
 }
