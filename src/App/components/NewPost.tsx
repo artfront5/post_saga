@@ -1,17 +1,16 @@
 import React from "react";
-
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useStateSelector } from "../../store/hooks";
-import { IPost, postsActions } from "../../store/posts/postsSlice";
 import { getCurrentElement } from "../../store/posts/post.selectors";
-import { useNavigate, useParams } from "react-router-dom";
+import { IPost, postsActions } from "../../store/posts/postsSlice";
+import { useNavigate } from "react-router-dom";
 
-export function FormForNewPost() {
+function NewPost() {
   const dispatch = useAppDispatch();
   const post = useStateSelector(getCurrentElement);
-
-  const history = useNavigate();
-
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   // функция setValue c аргументами какого-либо ключа объекта IPost
   const setValue = (fieldName: "title" | "body") => {
@@ -29,7 +28,7 @@ export function FormForNewPost() {
         userId: 1,
       })
     );
-    history("/posts");
+    navigate("/posts");
   }
 
   return (
@@ -51,3 +50,5 @@ export function FormForNewPost() {
     </div>
   );
 }
+
+export default NewPost;

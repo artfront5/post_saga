@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPostOmitted, IRemovePost } from './post.types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IPostOmitted, IRemovePost } from "./post.types";
 
 export interface IPost {
   userId: number;
@@ -13,24 +13,32 @@ export interface IFilter {
   body: string;
 }
 
-const postDefaultValues = { body: '', title: '', userId: 1 };
+export interface IStatus {
+  REQUEST_COMPLETED: boolean;
+}
 
-const filtersDefaultValues = { title: '', body: '' };
+const postDefaultValues = { body: "", title: "", userId: 1 };
+
+const filtersDefaultValues = { title: "", body: "" };
+
+const statusType = { REQUEST_COMPLETED: false };
 
 interface IPostState {
   posts: Array<IPost>;
   currentElement: IPost;
   filter: IFilter;
+  status: IStatus;
 }
 
 const initialState: IPostState = {
   posts: [],
   currentElement: postDefaultValues,
   filter: filtersDefaultValues,
+  status: statusType,
 };
 
 const postsSlice = createSlice({
-  name: 'post',
+  name: "post",
   initialState,
   reducers: {
     // reducer для получения данных GET
@@ -65,6 +73,7 @@ const postsSlice = createSlice({
         post.title = payload.title;
         post.body = payload.body;
       }
+      state.status.REQUEST_COMPLETED = true;
     },
 
     // reducer для фильтров

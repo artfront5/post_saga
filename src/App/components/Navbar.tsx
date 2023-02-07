@@ -5,7 +5,7 @@ export function Navbar() {
   return (
     <nav>
       <div className="nav-wrapper blue-grey px1 ">
-        <a href="*" className="brand-logo">
+        <a href="/posts" className="brand-logo">
           Posts
         </a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -14,9 +14,6 @@ export function Navbar() {
           </li>
           <li>
             <Link to="/posts">Посты</Link>
-          </li>
-          <li>
-            <Link to="/newPost">Новый пост</Link>
           </li>
         </ul>
       </div>

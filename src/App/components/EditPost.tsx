@@ -1,10 +1,9 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useStateSelector, useAppDispatch } from '../../store/hooks';
-import { postsActions, IPost } from '../../store/posts/postsSlice';
-import { getUsers } from '../../store/users/user.selectors';
-import UpdatePost from './UpdatePost';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useStateSelector, useAppDispatch } from "../../store/hooks";
+import { postsActions, IPost } from "../../store/posts/postsSlice";
+import { getUsers } from "../../store/users/user.selectors";
+import { useNavigate } from "react-router-dom";
 
 function EditPost() {
   const navigate = useNavigate();
@@ -14,8 +13,10 @@ function EditPost() {
     state.posts.posts.find((el) => el.id === +postId!)
   );
 
-  const [title, setSaveTitle] = React.useState(post?.title || '');
-  const [body, setSaveBody] = React.useState(post?.body || '');
+  const [title, setSaveTitle] = React.useState(post?.title || "");
+  const [body, setSaveBody] = React.useState(post?.body || "");
+
+  const [loading, setLoading] = React.useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +24,12 @@ function EditPost() {
     return <p>No post</p>;
   }
 
+  if (loading) {
+    return <h4>Сохранение изменений...</h4>;
+  }
+
   function savePost() {
+    setLoading(true);
     dispatch(
       postsActions.reqEditPost({
         title,
@@ -33,7 +39,10 @@ function EditPost() {
       })
     );
 
-    // navigate('/posts');
+    setTimeout(() => {
+      navigate("/posts");
+      setLoading(false);
+    }, 1000);
   }
 
   return (
@@ -52,7 +61,12 @@ function EditPost() {
         value={body}
         onChange={(e) => setSaveBody(e.target.value)}
       />
-      <button onClick={savePost}>Save</button>
+      <button
+        onClick={savePost}
+        className="waves-effect waves-light btn-small green"
+      >
+        <i className="material-icons right">save</i>save
+      </button>
     </div>
   );
 }

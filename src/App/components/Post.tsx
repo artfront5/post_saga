@@ -1,12 +1,12 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { IPost, postsActions } from '../../store/posts/postsSlice';
-import { useAppDispatch, useStateSelector } from '../../store/hooks';
-import { getUsers } from '../../store/users/user.selectors';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import { IPost, postsActions } from "../../store/posts/postsSlice";
+import { useAppDispatch, useStateSelector } from "../../store/hooks";
+import { getUsers } from "../../store/users/user.selectors";
+import { Link } from "react-router-dom";
 
 export default function Post({ id, title, body, userId }: IPost) {
-  const titleRef = useRef<HTMLInputElement>(null);
-  const bodyRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLTextAreaElement>(null);
+  const bodyRef = useRef<HTMLTextAreaElement>(null);
   // const [count, setCount] = useState(1);
 
   const users = useStateSelector(getUsers);
@@ -19,19 +19,32 @@ export default function Post({ id, title, body, userId }: IPost) {
   return (
     <div className="boxForPosts">
       <div className="post">
-        {/* {postAuthor && (
-          <div>
-            <p>{postAuthor.name}</p> <p>{postAuthor.id}</p>
-          </div>
-        )} */}
-        <input className="textarea" ref={titleRef} defaultValue={title} />
-        <input className="textarea" ref={bodyRef} defaultValue={body} />
+        <textarea
+          className="textarea"
+          ref={titleRef}
+          defaultValue={title}
+          disabled
+        />
+        <textarea
+          className="textarea1"
+          ref={bodyRef}
+          defaultValue={body}
+          disabled
+        />
         <button
-          onClick={() => id !== undefined && dispatch(postsActions.reqRemovePosts(id))}
+          onClick={() =>
+            id !== undefined && dispatch(postsActions.reqRemovePosts(id))
+          }
+          className="waves-effect waves-light btn-small  red darken-1"
         >
-          Удалить
-        </button>{' '}
-        <Link to={`/posts/${id}/edit`}>Редактировать</Link>
+          <i className="material-icons right">delete</i>delete
+        </button>{" "}
+        <Link
+          to={`/posts/${id}/edit`}
+          className="waves-effect waves-light btn-small orange accent-2"
+        >
+          <i className="material-icons right">border_color</i>edit
+        </Link>
       </div>
     </div>
   );

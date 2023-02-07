@@ -1,13 +1,15 @@
-import React from 'react';
-import { useStateSelector, useAppDispatch } from '../../store/hooks';
-import { getFilterPosts, getPosts } from '../../store/posts/post.selectors';
-import { postsActions } from '../../store/posts/postsSlice';
-import { usersActions } from '../../store/users/usersSlice';
-import Post from './Post';
-import Filter from './Filter';
+import React from "react";
+import { useStateSelector, useAppDispatch } from "../../store/hooks";
+import { getFilterPosts, getPosts } from "../../store/posts/post.selectors";
+import { postsActions } from "../../store/posts/postsSlice";
+import { usersActions } from "../../store/users/usersSlice";
+import Post from "./Post";
+import Filter from "./Filter";
+import { Link, useParams } from "react-router-dom";
 
 function Posts() {
-  const [details, setDetails] = React.useState<boolean | string>('false');
+  const { id } = useParams();
+  const [details, setDetails] = React.useState<boolean | string>("false");
 
   const posts = useStateSelector(getPosts);
 
@@ -18,7 +20,7 @@ function Posts() {
     const lowerCaseFilterBody = body.toLowerCase();
 
     if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
-      console.log(posts, 'posts');
+      console.log(posts, "posts");
 
       return posts;
     }
@@ -41,7 +43,7 @@ function Posts() {
   }, [posts, title, body]);
 
   const dispatch = useAppDispatch();
-  console.log(filteredPosts, 'filteredPosts');
+  console.log(filteredPosts, "filteredPosts");
 
   React.useEffect(() => {
     dispatch(postsActions.getPosts());
@@ -53,9 +55,12 @@ function Posts() {
   }
   return (
     <div>
-      <a className="btn-floating btn-large waves-effect waves-light green mb">
+      <Link
+        to={`/posts/${id}/new`}
+        className="btn-floating btn-large waves-effect waves-light green mb"
+      >
         <i className="material-icons">add</i>
-      </a>
+      </Link>
       <Filter />
       {filteredPosts.map((post) => {
         return <Post key={post.id} {...post} />;
