@@ -50,14 +50,14 @@ function EditPost() {
       <input
         className="inputNew"
         type="text"
-        placeholder="сортировать по title"
+        placeholder="sort by title"
         value={title}
         onChange={(e) => setSaveTitle(e.target.value)}
       />
       <input
         type="text"
         className="inputNew"
-        placeholder="сортировать по body"
+        placeholder="sort by body"
         value={body}
         onChange={(e) => setSaveBody(e.target.value)}
       />
