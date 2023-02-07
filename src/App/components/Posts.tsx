@@ -9,7 +9,6 @@ import { Link, useParams } from "react-router-dom";
 
 function Posts() {
   const { id } = useParams();
-  const [details, setDetails] = React.useState<boolean | string>("false");
 
   const posts = useStateSelector(getPosts);
 
@@ -20,8 +19,6 @@ function Posts() {
     const lowerCaseFilterBody = body.toLowerCase();
 
     if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
-      console.log(posts, "posts");
-
       return posts;
     }
 
@@ -43,16 +40,12 @@ function Posts() {
   }, [posts, title, body]);
 
   const dispatch = useAppDispatch();
-  console.log(filteredPosts, "filteredPosts");
 
   React.useEffect(() => {
     dispatch(postsActions.getPosts());
     dispatch(usersActions.getUsers());
   }, [dispatch]);
 
-  function handlerShowPosts() {
-    setDetails((prev) => !prev);
-  }
   return (
     <div>
       <Link

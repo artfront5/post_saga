@@ -13,14 +13,14 @@ const Filter = () => {
       <input
         className="inputNew"
         type="text"
-        placeholder="сортировать по title"
+        placeholder="sort by title"
         value={title}
         onChange={(e) => dispatch(postsActions.setTitle(e.target.value))}
       />
       <input
         type="text"
         className="inputNew"
-        placeholder="сортировать по body"
+        placeholder="sort by body"
         value={body}
         onChange={(e) => dispatch(postsActions.setBody(e.target.value))}
       />

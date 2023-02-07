@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useStateSelector, useAppDispatch } from "../../store/hooks";
-import { postsActions, IPost } from "../../store/posts/postsSlice";
-import { getUsers } from "../../store/users/user.selectors";
+import { postsActions } from "../../store/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
 
 function EditPost() {
@@ -49,15 +48,11 @@ function EditPost() {
     <div className="addPostBox">
       <textarea
         className="textarea"
-        // className="inputNew"
-        // type="text"
         placeholder="sort by title"
         value={title}
         onChange={(e) => setSaveTitle(e.target.value)}
       />
       <textarea
-        // type="text"
-        // className="inputNew"
         className="textarea1"
         placeholder="sort by body"
         value={body}

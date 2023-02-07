@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import { IPost, postsActions } from "../../store/posts/postsSlice";
 import { useAppDispatch, useStateSelector } from "../../store/hooks";
 import { getUsers } from "../../store/users/user.selectors";
