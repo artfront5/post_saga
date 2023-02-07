@@ -44,20 +44,18 @@ function EditPost() {
 
   return (
     <div className="addPostBox">
-      <div className="boxForInput">
-        <FormForPost
-          inputClassName="textarea"
-          value={title}
-          placeholder="edit title"
-          onChange={(e) => setSaveTitle(e.target.value)}
-        />
-        <FormForPost
-          inputClassName="textarea1"
-          value={body}
-          placeholder="edit body"
-          onChange={(e) => setSaveBody(e.target.value)}
-        />
-      </div>
+      <FormForPost
+        inputClassName="textarea"
+        value={title}
+        placeholder="edit title"
+        onChange={(e) => setSaveTitle(e.target.value)}
+      />
+      <FormForPost
+        inputClassName="textarea1"
+        value={body}
+        placeholder="edit body"
+        onChange={(e) => setSaveBody(e.target.value)}
+      />
 
       <button
         onClick={savePost}

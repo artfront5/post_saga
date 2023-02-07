@@ -61,9 +61,9 @@
   border: none;
 }
 
-.boxForInput {
-  max-width: 500px;
-}
+/* .boxForInput {
+  width: 100%;
+} */
 
 * {
   box-sizing: border-box;
@@ -90,6 +90,7 @@
   align-items: center;
   flex-direction: column;
   margin: 10px;
+  width: 100%;
 }
 
 .inputNew {
