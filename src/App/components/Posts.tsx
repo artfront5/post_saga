@@ -5,11 +5,9 @@ import { postsActions } from "../../store/posts/postsSlice";
 import { usersActions } from "../../store/users/usersSlice";
 import Post from "./Post";
 import Filter from "./Filter";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Posts() {
-  const { id } = useParams();
-
   const posts = useStateSelector(getPosts);
 
   const { title, body } = useStateSelector(getFilterPosts);

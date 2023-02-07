@@ -7,6 +7,7 @@ import {
 } from "../../store/posts/post.selectors";
 import { IPost, postsActions } from "../../store/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
+import { FormForPost } from "./FormForPost";
 
 function NewPost() {
   const dispatch = useAppDispatch();
@@ -43,17 +44,17 @@ function NewPost() {
 
   return (
     <div className="addPostBox">
-      <input
-        className="inputNew"
+      <FormForPost
+        inputClassName="textarea"
         value={post.title}
+        placeholder="save title"
         onChange={(e) => setValue("title")(e.target.value)}
-        placeholder="title"
       />
-      <input
-        className="inputNew"
+      <FormForPost
+        inputClassName="textarea1"
         value={post.body}
+        placeholder="save title"
         onChange={(e) => setValue("body")(e.target.value)}
-        placeholder="body"
       />
       <button
         onClick={handlerAddPost}

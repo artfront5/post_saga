@@ -4,6 +4,7 @@ import { useStateSelector, useAppDispatch } from "../../store/hooks";
 import { postsActions } from "../../store/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
 import { getRequestStatus } from "../../store/posts/post.selectors";
+import { FormForPost } from "./FormForPost";
 
 function EditPost() {
   const navigate = useNavigate();
@@ -43,18 +44,21 @@ function EditPost() {
 
   return (
     <div className="addPostBox">
-      <textarea
-        className="textarea"
-        placeholder="edit title"
-        value={title}
-        onChange={(e) => setSaveTitle(e.target.value)}
-      />
-      <textarea
-        className="textarea1"
-        placeholder="edit body"
-        value={body}
-        onChange={(e) => setSaveBody(e.target.value)}
-      />
+      <div className="boxForInput">
+        <FormForPost
+          inputClassName="textarea"
+          value={title}
+          placeholder="edit title"
+          onChange={(e) => setSaveTitle(e.target.value)}
+        />
+        <FormForPost
+          inputClassName="textarea1"
+          value={body}
+          placeholder="edit body"
+          onChange={(e) => setSaveBody(e.target.value)}
+        />
+      </div>
+
       <button
         onClick={savePost}
         className="waves-effect waves-light btn-small green"

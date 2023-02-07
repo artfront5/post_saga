@@ -61,6 +61,10 @@
   border: none;
 }
 
+.boxForInput {
+  max-width: 500px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -89,5 +93,5 @@
 }
 
 .inputNew {
-  max-width: 600px;
+  max-width: 500px;
 }
