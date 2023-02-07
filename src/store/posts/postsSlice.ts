@@ -63,6 +63,7 @@ const postsSlice = createSlice({
       const post = state.posts.find((post) => post.id === payload.id);
       if (post) {
         post.title = payload.title;
+        post.body = payload.body;
       }
     },
 

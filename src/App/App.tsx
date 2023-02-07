@@ -76,14 +76,14 @@
 // }
 
 // export default App;
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Navbar } from "./components/Navbar";
-import { FormForNewPost } from "./components/FormForNewPost";
-import Posts from "./components/Posts";
-import "./App.css";
-import Home from "./components/Home";
-import EditPost from "./components/EditPost";
+import React from 'react';
+import { BrowserRouter as Router, Outlet, Route, Routes } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
+import { FormForNewPost } from './components/FormForNewPost';
+import Posts from './components/Posts';
+import './App.css';
+import Home from './components/Home';
+import EditPost from './components/EditPost';
 
 export function App() {
   return (
@@ -91,11 +91,14 @@ export function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="*" element={<Home />} />
           <Route path="/" element={<Home />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/:id/edit" element={<EditPost />} />
+          <Route path="/posts" element={<Outlet />}>
+            <Route index element={<Posts />} />
+            <Route path=":postId/edit" element={<EditPost />} />
+          </Route>
+
           <Route path="/newPost" element={<FormForNewPost />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Router>
     </div>

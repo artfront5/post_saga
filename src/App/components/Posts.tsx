@@ -1,13 +1,13 @@
-import React from "react";
-import { useStateSelector, useAppDispatch } from "../../store/hooks";
-import { getFilterPosts, getPosts } from "../../store/posts/post.selectors";
-import { postsActions } from "../../store/posts/postsSlice";
-import { usersActions } from "../../store/users/usersSlice";
-import Post from "./Post";
-import Filter from "./Filter";
+import React from 'react';
+import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { getFilterPosts, getPosts } from '../../store/posts/post.selectors';
+import { postsActions } from '../../store/posts/postsSlice';
+import { usersActions } from '../../store/users/usersSlice';
+import Post from './Post';
+import Filter from './Filter';
 
 function Posts() {
-  const [details, setDetails] = React.useState<boolean | string>("false");
+  const [details, setDetails] = React.useState<boolean | string>('false');
 
   const posts = useStateSelector(getPosts);
 
@@ -18,6 +18,8 @@ function Posts() {
     const lowerCaseFilterBody = body.toLowerCase();
 
     if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
+      console.log(posts, 'posts');
+
       return posts;
     }
 
@@ -39,6 +41,7 @@ function Posts() {
   }, [posts, title, body]);
 
   const dispatch = useAppDispatch();
+  console.log(filteredPosts, 'filteredPosts');
 
   React.useEffect(() => {
     dispatch(postsActions.getPosts());
@@ -55,7 +58,7 @@ function Posts() {
       </a>
       <Filter />
       {filteredPosts.map((post) => {
-        return <Post {...post} />;
+        return <Post key={post.id} {...post} />;
       })}
     </div>
   );
