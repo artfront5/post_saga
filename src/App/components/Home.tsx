@@ -1,7 +1,11 @@
 import React from "react";
 
 function Home() {
-  return <div>Работа с постами</div>;
+  return (
+    <div>
+      <p>click on Posts</p>
+    </div>
+  );
 }
 
 export default Home;
