@@ -25,7 +25,7 @@ function EditPost() {
   }
 
   if (loading) {
-    return <h4>Сохранение изменений...</h4>;
+    return <p>Сохранение изменений...</p>;
   }
 
   function savePost() {
