@@ -1,7 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useStateSelector } from "../../store/hooks";
-import { getCurrentElement } from "../../store/posts/post.selectors";
+import {
+  getCurrentElement,
+  getRequestStatus,
+} from "../../store/posts/post.selectors";
 import { IPost, postsActions } from "../../store/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +12,7 @@ function NewPost() {
   const dispatch = useAppDispatch();
   const post = useStateSelector(getCurrentElement);
   const { id } = useParams();
-
+  const status = useStateSelector(getRequestStatus);
   const navigate = useNavigate();
 
   // функция setValue c аргументами какого-либо ключа объекта IPost
@@ -31,9 +34,15 @@ function NewPost() {
     navigate("/posts");
   }
 
+  // React.useEffect(() => {
+  //   if (status === "succses") {
+  //     navigate("/posts");
+  //     dispatch(postsActions.setStatus({ status: "unsetted" }));
+  //   }
+  // }, [dispatch, status]);
+
   return (
     <div className="addPostBox">
-      {id}
       <input
         className="inputNew"
         value={post.title}

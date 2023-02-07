@@ -12,29 +12,24 @@ export interface IFilter {
   title: string;
   body: string;
 }
-
-export interface IStatus {
-  REQUEST_COMPLETED: boolean;
-}
+type statusType = "pending" | "succses" | "error" | "unsetted";
 
 const postDefaultValues = { body: "", title: "", userId: 1 };
 
 const filtersDefaultValues = { title: "", body: "" };
 
-const statusType = { REQUEST_COMPLETED: false };
-
 interface IPostState {
   posts: Array<IPost>;
   currentElement: IPost;
   filter: IFilter;
-  status: IStatus;
+  status: statusType;
 }
 
 const initialState: IPostState = {
   posts: [],
   currentElement: postDefaultValues,
   filter: filtersDefaultValues,
-  status: statusType,
+  status: "unsetted",
 };
 
 const postsSlice = createSlice({
@@ -73,7 +68,6 @@ const postsSlice = createSlice({
         post.title = payload.title;
         post.body = payload.body;
       }
-      state.status.REQUEST_COMPLETED = true;
     },
 
     // reducer для фильтров
@@ -82,6 +76,10 @@ const postsSlice = createSlice({
     },
     setBody: (state, { payload }: PayloadAction<string>) => {
       state.filter.body = payload;
+    },
+
+    setStatus: (state, { payload }: PayloadAction<{ status: statusType }>) => {
+      state.status = payload.status;
     },
   },
 });
