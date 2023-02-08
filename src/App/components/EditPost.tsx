@@ -1,56 +1,58 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useStateSelector, useAppDispatch } from "../../store/hooks";
-import { postsActions } from "../../store/posts/postsSlice";
-import { useNavigate } from "react-router-dom";
-import { getRequestStatus } from "../../store/posts/post.selectors";
-import { FormForPost } from "./FormForPost";
+// import { useParams } from "react-router-dom";
+// import { useStateSelector, useAppDispatch } from "../../store/hooks";
+// import { postsActions } from "../../store/posts/postsSlice";
+// import { useNavigate } from "react-router-dom";
+// import { getRequestStatus } from "../../store/posts/post.selectors";
+// import { InputField } from "./common/InputField";
+import { FormForPost } from "./common/FormForPost";
 
 function EditPost() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { postId } = useParams();
-  const status = useStateSelector(getRequestStatus);
-  const post = useStateSelector((state) =>
-    state.posts.posts.find((el) => el.id === +postId!)
-  );
+  // const { postId } = useParams();
+  // const status = useStateSelector(getRequestStatus);
+  // const post = useStateSelector((state) =>
+  //   state.posts.posts.find((el) => el.id === +postId!)
+  // );
 
-  const [title, setSaveTitle] = React.useState(post?.title || "");
-  const [body, setSaveBody] = React.useState(post?.body || "");
+  // const [title, setSaveTitle] = React.useState(post?.title || "");
+  // const [body, setSaveBody] = React.useState(post?.body || "");
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  function savePost() {
-    dispatch(
-      postsActions.reqEditPost({
-        title,
-        body,
-        userId: post!.userId,
-        id: post!.id,
-      })
-    );
-  }
+  // function savePost() {
+  //   dispatch(
+  //     postsActions.reqEditPost({
+  //       title,
+  //       body,
+  //       userId: post!.userId,
+  //       id: post!.id,
+  //     })
+  //   );
+  // }
 
-  React.useEffect(() => {
-    if (status === "succses") {
-      navigate("/posts");
-      dispatch(postsActions.setStatus({ status: "unsetted" }));
-    }
-  }, [dispatch, status]);
+  // React.useEffect(() => {
+  //   if (status === "succses") {
+  //     navigate("/posts");
+  //     dispatch(postsActions.setStatus({ status: "unsetted" }));
+  //   }
+  // }, [dispatch, status]);
 
-  if (!post) {
-    return <p>No post</p>;
-  }
+  // if (!post) {
+  //   return <p>No post</p>;
+  // }
 
   return (
     <div className="addPostBox">
-      <FormForPost
+      <FormForPost />
+      {/* <InputField
         inputClassName="textarea"
         value={title}
         placeholder="edit title"
         onChange={(e) => setSaveTitle(e.target.value)}
       />
-      <FormForPost
+      <InputField
         inputClassName="textarea1"
         value={body}
         placeholder="edit body"
@@ -62,7 +64,7 @@ function EditPost() {
         className="waves-effect waves-light btn-small green"
       >
         <i className="material-icons right">save</i>save
-      </button>
+      </button> */}
     </div>
   );
 }

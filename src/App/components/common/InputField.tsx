@@ -2,12 +2,12 @@ import React from "react";
 
 type FormProps = {
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
   inputClassName?: string;
 };
 
-export const FormForPost: React.FC<FormProps> = ({
+export const InputField: React.FC<FormProps> = ({
   value,
   onChange,
   inputClassName,
@@ -24,5 +24,3 @@ export const FormForPost: React.FC<FormProps> = ({
     </div>
   );
 };
-
-// export default Form;
