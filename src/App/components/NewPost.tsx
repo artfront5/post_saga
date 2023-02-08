@@ -32,15 +32,14 @@ function NewPost() {
         userId: 1,
       })
     );
-    navigate("/posts");
   }
 
-  // React.useEffect(() => {
-  //   if (status === "succses") {
-  //     navigate("/posts");
-  //     dispatch(postsActions.setStatus({ status: "unsetted" }));
-  //   }
-  // }, [dispatch, status]);
+  React.useEffect(() => {
+    if (status === "succses") {
+      navigate("/posts");
+      dispatch(postsActions.setStatus({ status: "unsetted" }));
+    }
+  }, [dispatch, status]);
 
   return (
     <div className="addPostBox">

@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 function Posts() {
   const posts = useStateSelector(getPosts);
-
   const { title, body } = useStateSelector(getFilterPosts);
 
   const filteredPosts = React.useMemo(() => {
@@ -40,8 +39,10 @@ function Posts() {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(postsActions.getPosts());
-    dispatch(usersActions.getUsers());
+    if (posts.length === 0) {
+      dispatch(postsActions.getPosts());
+      dispatch(usersActions.getUsers());
+    }
   }, [dispatch]);
 
   return (

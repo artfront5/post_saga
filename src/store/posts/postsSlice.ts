@@ -78,6 +78,7 @@ const postsSlice = createSlice({
       state.filter.body = payload;
     },
 
+    // reducer для корректного редиректа
     setStatus: (state, { payload }: PayloadAction<{ status: statusType }>) => {
       state.status = payload.status;
     },

@@ -21,13 +21,13 @@ export default function Post({ id, title, body, userId }: IPost) {
       <div className="post">
         <textarea
           className="textarea"
-          ref={titleRef}
+          value={title}
           defaultValue={title}
           disabled
         />
         <textarea
           className="textarea1"
-          ref={bodyRef}
+          value={body}
           defaultValue={body}
           disabled
         />
