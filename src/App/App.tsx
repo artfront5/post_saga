@@ -9,8 +9,6 @@ import { Navbar } from "./components/Navbar";
 import Posts from "./components/Posts";
 import "./App.css";
 import Home from "./components/Home";
-import EditPost from "./components/EditPost";
-import NewPost from "./components/NewPost";
 import { CreationBar } from "./components/common/CreationBar";
 
 export function App() {

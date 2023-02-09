@@ -83,7 +83,7 @@ const postsSlice = createSlice({
       state.status = payload.status;
     },
 
-    // reducer для отлова id
+    // reducer для поиска id
     setCurrentElementById: (
       state,
       { payload }: PayloadAction<{ id: number }>

@@ -1,4 +1,4 @@
-import { takeEvery } from "redux-saga/effects";
+import { select, takeEvery } from "redux-saga/effects";
 import { IPost, postsActions } from "./postsSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IPostOmitted } from "./post.types";
@@ -17,6 +17,7 @@ const fetchPosts: fetchPostsFnType = async () => {
   );
 };
 function* workGetPostsFetch() {
+  
   const posts: Array<IPost> = yield call(fetchPosts);
   yield put(postsActions.setPosts(posts));
 }
