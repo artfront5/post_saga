@@ -11,6 +11,7 @@ import "./App.css";
 import Home from "./components/Home";
 import EditPost from "./components/EditPost";
 import NewPost from "./components/NewPost";
+import { CreationBar } from "./components/common/CreationBar";
 
 export function App() {
   return (
@@ -21,8 +22,7 @@ export function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Outlet />}>
             <Route index element={<Posts />} />
-            <Route path=":postId/edit" element={<EditPost />} />
-            <Route path=":id/new" element={<NewPost />} />
+            <Route path=":postId" element={<CreationBar />} />
           </Route>
           <Route path="*" element={<Home />} />
         </Routes>

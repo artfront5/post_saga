@@ -5,7 +5,7 @@ import React from "react";
 // import { useNavigate } from "react-router-dom";
 // import { getRequestStatus } from "../../store/posts/post.selectors";
 // import { InputField } from "./common/InputField";
-import { FormForPost } from "./common/FormForPost";
+import { CreationBar } from "./common/CreationBar";
 
 function EditPost() {
   // const navigate = useNavigate();
@@ -45,7 +45,7 @@ function EditPost() {
 
   return (
     <div className="addPostBox">
-      <FormForPost />
+      <CreationBar />
       {/* <InputField
         inputClassName="textarea"
         value={title}

@@ -48,7 +48,7 @@ function Posts() {
   return (
     <div>
       <Link
-        to={`/posts/${-1}/new`}
+        to={`/posts/${-1}`}
         className="btn-floating btn-large waves-effect waves-light green mb"
       >
         <i className="material-icons">add</i>

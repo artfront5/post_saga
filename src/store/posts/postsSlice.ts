@@ -82,6 +82,20 @@ const postsSlice = createSlice({
     setStatus: (state, { payload }: PayloadAction<{ status: statusType }>) => {
       state.status = payload.status;
     },
+
+    // reducer для отлова id
+    setCurrentElementById: (
+      state,
+      { payload }: PayloadAction<{ id: number }>
+    ) => {
+      const { id } = payload;
+      if (id === -1) {
+        state.currentElement = postDefaultValues;
+      } else {
+        const post = state.posts.find((el) => el.id === id);
+        state.currentElement = !post ? postDefaultValues : post;
+      }
+    },
   },
 });
 
