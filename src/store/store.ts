@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import createSagaMiddleware from '@redux-saga/core';
-import postSaga from './posts/sagas';
-import { postsReducer } from './posts/postsSlice';
-import { usersReducer } from './users/usersSlice';
-import userSaga from './users/sagas';
+import createSagaMiddleware from "@redux-saga/core";
+// import postSaga from "./posts/sagas";
+import { postsReducer } from "./posts/postsSlice";
+import { usersReducer } from "./users/usersSlice";
+// import userSaga from "./users/sagas";
+import { rootSaga } from "./saras-spawn";
 
 const saga = createSagaMiddleware();
 
@@ -16,5 +17,7 @@ export const store = configureStore({
   middleware: [saga],
 });
 
-saga.run(postSaga);
-saga.run(userSaga);
+// saga.run(postSaga);
+// saga.run(userSaga);
+
+saga.run(rootSaga);

@@ -82,7 +82,7 @@ function* workReplace({ payload }: PayloadAction<IPost>) {
 }
 
 // вотчер для всего
-function* postSaga() {
+function* postSaga(): SagaIterator {
   yield takeEvery(postsActions.getPosts, workGetPostsFetch);
   yield takeEvery(postsActions.reqAddPost, workAddPost);
   yield takeEvery(postsActions.reqRemovePosts, workRemovePost);

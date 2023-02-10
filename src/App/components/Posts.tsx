@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Posts() {
   const posts = useStateSelector(getPosts);
-  const { title, body } = useStateSelector(getFilterPosts);
+  // const { title, body } = useStateSelector(getFilterPosts);
 
   // const filteredPosts = React.useMemo(() => {
   //   const lowerCaseFilterTitle = title.toLowerCase();

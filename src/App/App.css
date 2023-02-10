@@ -89,5 +89,11 @@
 }
 
 .inputNew {
-  max-width: 500px;
+  max-width: 200px;
+}
+
+.boxForTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
