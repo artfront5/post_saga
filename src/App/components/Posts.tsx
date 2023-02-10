@@ -11,30 +11,30 @@ function Posts() {
   const posts = useStateSelector(getPosts);
   const { title, body } = useStateSelector(getFilterPosts);
 
-  const filteredPosts = React.useMemo(() => {
-    const lowerCaseFilterTitle = title.toLowerCase();
-    const lowerCaseFilterBody = body.toLowerCase();
+  // const filteredPosts = React.useMemo(() => {
+  //   const lowerCaseFilterTitle = title.toLowerCase();
+  //   const lowerCaseFilterBody = body.toLowerCase();
 
-    if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
-      return posts;
-    }
+  //   if (!lowerCaseFilterTitle && !lowerCaseFilterBody) {
+  //     return posts;
+  //   }
 
-    return posts.filter((post) => {
-      if (lowerCaseFilterTitle) {
-        if (!post.title.toLowerCase().includes(lowerCaseFilterTitle)) {
-          return false;
-        }
-      }
+  //   return posts.filter((post) => {
+  //     if (lowerCaseFilterTitle) {
+  //       if (!post.title.toLowerCase().includes(lowerCaseFilterTitle)) {
+  //         return false;
+  //       }
+  //     }
 
-      if (lowerCaseFilterBody) {
-        if (!post.body.toLowerCase().includes(lowerCaseFilterBody)) {
-          return false;
-        }
-      }
+  //     if (lowerCaseFilterBody) {
+  //       if (!post.body.toLowerCase().includes(lowerCaseFilterBody)) {
+  //         return false;
+  //       }
+  //     }
 
-      return true;
-    });
-  }, [posts, title, body]);
+  //     return true;
+  //   });
+  // }, [posts, title, body]);
 
   const dispatch = useAppDispatch();
 
@@ -54,7 +54,7 @@ function Posts() {
         <i className="material-icons">add</i>
       </Link>
       <Filter />
-      {filteredPosts.map((post) => {
+      {posts.map((post) => {
         return <Post key={post.id} {...post} />;
       })}
     </div>

@@ -15,14 +15,20 @@ const Filter = () => {
         type="text"
         placeholder="sort by title"
         value={title}
-        onChange={(e) => dispatch(postsActions.setTitle(e.target.value))}
+        onChange={(e) => {
+          dispatch(postsActions.setTitle(e.target.value));
+          dispatch(postsActions.getPosts());
+        }}
       />
       <input
         type="text"
         className="inputNew"
         placeholder="sort by body"
         value={body}
-        onChange={(e) => dispatch(postsActions.setBody(e.target.value))}
+        onChange={(e) => {
+          dispatch(postsActions.setBody(e.target.value));
+          dispatch(postsActions.getPosts());
+        }}
       />
     </div>
   );
