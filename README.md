@@ -12,4 +12,4 @@ npm start
 
 В браузере откроется страница с постами.
 
-Проект реализован на стеке: Redux Toolkit, Redux-Saga, TypeScript.
+Стек проекта: Redux Toolkit, Redux-Saga, TypeScript.
