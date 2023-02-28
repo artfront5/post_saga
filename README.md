@@ -8,6 +8,9 @@
 
 ```
 npm install
+
+```
+```
 npm start
 ```
 
